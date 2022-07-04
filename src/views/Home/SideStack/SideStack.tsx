@@ -8,12 +8,6 @@ const SideStackContainer = styled.section`
   justify-content: space-evenly;
   align-items: center;
   transition: all 300ms ease-in-out;
-
-  svg {
-    &:hover {
-      transform: scale(1.1);
-    }
-  }
 `;
 
 const SideStack = () => {
