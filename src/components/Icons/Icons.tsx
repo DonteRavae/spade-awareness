@@ -11,12 +11,10 @@ type IconProps = {
 
 const IconContainer = styled.div`
   svg {
-    &.logo {
-    }
-
     &:hover {
       cursor: pointer;
       filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7));
+      transform: scale(1.1);
     }
   }
 `;
