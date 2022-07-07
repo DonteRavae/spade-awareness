@@ -1,36 +1,62 @@
-import { MouseEventHandler } from "react";
+import React, {
+  useState,
+  useEffect,
+  forwardRef,
+  MouseEventHandler,
+  WheelEvent,
+  ForwardedRef,
+} from "react";
 import Icon from "../Icons/Icons";
 import LogoContainer from "./Logo.styled";
 
 type LogoProps = {
-  width?: number;
-  height?: number;
   withText?: boolean;
+  withZoom?: boolean;
+  size?: "small" | "xlarge";
+  handleScroll?: (event: WheelEvent) => void;
 };
 
-/**
- *  TODO - add 'click' event listener; redirect to home ('/')
- */
+const Logo = forwardRef(
+  (
+    { withText, size, handleScroll }: LogoProps,
+    ref: ForwardedRef<HTMLElement>
+  ) => {
+    const [sizeCnv, setSizeCnv] = useState({ height: 360, width: 450 });
 
-const Logo = ({ width, height, withText }: LogoProps) => {
-  const handleClick: MouseEventHandler = (event) => {
-    console.log(event.currentTarget);
-  };
+    useEffect(() => {
+      if (size === "xlarge") setSizeCnv({ height: 800, width: 923 });
+      else if (size === "small") setSizeCnv({ height: 80, width: 100 });
+      else setSizeCnv({ height: 360, width: 450 });
+    }, [size]);
 
-  return withText ? (
-    <LogoContainer className="logo" onClick={handleClick}>
-      <Icon icon="logo" height={height || 650} width={width || 800} />
+    /**************/
+    /* HANDLERS
+    /**************
+     * TODO - add 'click' event listener; redirect to home ('/')
+     **************/
 
-      <h3>
-        POST TRAUMATIC STRESS DISORDER <br /> SUICIDE | ANXIETY | DEPRESSION |
-        EPILEPSY
-      </h3>
-    </LogoContainer>
-  ) : (
-    <LogoContainer>
-      <Icon icon="logo" height={height} width={width} />
-    </LogoContainer>
-  );
-};
+    const handleClick: MouseEventHandler = (event) => {
+      console.log(event.currentTarget);
+    };
+
+    return (
+      <LogoContainer
+        className="logo"
+        onClick={handleClick}
+        onWheel={handleScroll}
+        size={size}
+        ref={ref}
+      >
+        <Icon icon="logo" height={sizeCnv.height} width={sizeCnv.width} />
+        {withText && (
+          <h3>
+            POST TRAUMATIC STRESS DISORDER <br /> SUICIDE | ANXIETY | DEPRESSION
+            | EPILEPSY
+          </h3>
+        )}
+      </LogoContainer>
+    );
+  }
+);
 
 export default Logo;
