@@ -9,13 +9,13 @@ const LogoContainer = styled.figure<LogoWrapperProps>`
     props.size === "small"
       ? "100px"
       : props.size === "xlarge"
-      ? "923px"
+      ? "823px"
       : "360px"};
   width: ${(props) =>
     props.size === "small"
       ? "100px"
       : props.size === "xlarge"
-      ? "900px"
+      ? "800px"
       : "450px"};
   position: relative;
   display: flex;
@@ -30,14 +30,14 @@ const LogoContainer = styled.figure<LogoWrapperProps>`
 
   h3 {
     position: absolute;
-    bottom: 140px;
+    bottom: 110px;
     text-align: center;
     color: white;
 
     font-family: "Rajdhani", sans-serif;
     font-style: normal;
     font-weight: 300;
-    font-size: ${(props) => (props.size === "small" ? "10px" : "38px")};
+    font-size: ${(props) => (props.size === "small" ? "10px" : "34px")};
     line-height: 44px;
     display: ${(props) => (props.size === "small" ? "none" : "inherit")};
   }

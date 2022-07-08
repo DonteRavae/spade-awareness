@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import SideStack from "./SideStack/SideStack";
-import LogoOverlay from "./LogoOverlay/LogoOverlay";
 import SpadeDeck from "./SpadeDeck/SpadeDeck";
 
 const HomeContainer = styled.main`
@@ -10,6 +9,7 @@ const HomeContainer = styled.main`
   display: flex;
   position: relative;
   overflow: hidden;
+  justify-content: center;
 `;
 
 const Home = () => {

@@ -3,18 +3,13 @@ import styled from "styled-components";
 import Logo from "../../../components/Logo/Logo";
 
 const LogoOverlayContainer = styled.article`
-  width: 90%;
-  height: calc(100% - 75px);
-  position: relative;
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3%;
-  padding-bottom: 5%;
-  position: absolute;
-  left: 10%;
-  z-index: 99;
   background: transparent;
+  padding-top: 1%;
+  z-index: 99;
 `;
 
 const LogoOverlay = () => {
@@ -25,29 +20,28 @@ const LogoOverlay = () => {
   const scaleLogo = (event: WheelEvent<Element>) => {
     if (!logoRef.current) return;
 
-    let targetedZoom;
-
     if (event.deltaY > 0) {
-      targetedZoom = Math.min(Math.max(0.1125, zoom - ZOOM_SPEED), 1);
+      // moving down
 
-      logoRef.current.style.transform = `scale(${targetedZoom})`;
-      setZoom(targetedZoom);
+      logoRef.current.style.transform = `scale(${Math.min(
+        Math.max(0, zoom - ZOOM_SPEED),
+        1
+      )})`;
+      setZoom(Math.min(Math.max(0, zoom - ZOOM_SPEED), 1));
     } else {
-      targetedZoom = Math.min(Math.max(0.1125, zoom + ZOOM_SPEED), 1);
-      logoRef.current.style.transform = `scale(${targetedZoom})`;
-      setZoom(targetedZoom);
+      // moving up
+
+      logoRef.current.style.transform = `scale(${Math.min(
+        Math.max(0, zoom + ZOOM_SPEED),
+        1
+      )})`;
+      setZoom(Math.min(Math.max(0, zoom + ZOOM_SPEED), 1));
     }
   };
 
   return (
-    <LogoOverlayContainer>
-      <Logo
-        withText
-        withZoom
-        handleScroll={scaleLogo}
-        size="xlarge"
-        ref={logoRef}
-      />
+    <LogoOverlayContainer onWheel={scaleLogo}>
+      <Logo withText size="small" ref={logoRef} />
     </LogoOverlayContainer>
   );
 };
